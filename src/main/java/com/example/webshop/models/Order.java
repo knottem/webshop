@@ -23,11 +23,11 @@ public class Order {
     private Customer customer;
 
     @OneToMany(cascade = CascadeType.ALL)
-    List<Order> orders;
+    List<Item> items;
 
-    public Order(Customer customer, List<Order> orders){
+    public Order(Customer customer, List<Item> items){
         this.customer = customer;
-        this.orders = orders;
+        this.items = items;
         this.orderDate = LocalDateTime.now();
     }
 }
