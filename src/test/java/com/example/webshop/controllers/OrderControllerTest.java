@@ -65,7 +65,7 @@ class OrderControllerTest {
     }
 
     @Test
-    void getAllProducts() throws Exception {
+    void testGetAllOrders() throws Exception {
         mockMvc.perform(get("/orders"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
@@ -75,7 +75,7 @@ class OrderControllerTest {
     }
 
     @Test
-    void getProductById() throws Exception {
+    void testGetOrderById() throws Exception {
         mockMvc.perform(get("/orders/2"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
@@ -83,4 +83,6 @@ class OrderControllerTest {
                                 .writeValueAsString(order1)
                 ));
     }
+
+  
 }
