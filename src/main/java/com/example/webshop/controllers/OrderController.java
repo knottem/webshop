@@ -20,12 +20,12 @@ public class OrderController {
     }
 
     @RequestMapping({ "/orders", "/orders/"})
-    public List<Order> getAllProducts() {
+    public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
 
     @RequestMapping("/orders/{id}")
-    public ResponseEntity<Object> getProductById(@PathVariable(required = false) long id) {
+    public ResponseEntity<Object> getOrderById(@PathVariable(required = false) long id) {
         Order order = orderRepository.findById(id).isPresent() ? orderRepository.findById(id).get() : null;
         if (order == null) {
             return new ResponseEntity<>(Collections.singletonMap("error", "Product not found"), HttpStatus.NOT_FOUND);
