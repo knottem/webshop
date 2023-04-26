@@ -1,10 +1,13 @@
 package com.example.webshop.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Data
@@ -17,6 +20,7 @@ public class Order {
     @GeneratedValue
     private long id;
 
+    @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private LocalDateTime orderDate;
 
     @OneToOne(cascade = CascadeType.ALL)
