@@ -27,6 +27,7 @@ dependencies {
     runtimeOnly("com.mysql:mysql-connector-j")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.0")
 }
 
 tasks.withType<Test> {

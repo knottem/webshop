@@ -5,6 +5,7 @@ import com.example.webshop.models.Item;
 import com.example.webshop.models.Order;
 import com.example.webshop.repositories.OrderRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,36 +34,40 @@ class OrderControllerTest {
     @MockBean
     private OrderRepository mockRepo;
 
+    ObjectMapper mapper = JsonMapper.builder()
+                .findAndAddModules()
+                .build();
+
     Order order = new Order(
-            new Customer(),
+            new Customer("testFirstName1", "testLastName1", "123123123"),
             List.of(
-                    new Item(),
-                    new Item())
+                    new Item("testItem", 200),
+                    new Item("testItem2", 300))
     );
 
     Order order1 = new Order(
-            new Customer(),
+            new Customer("testFirstName2", "testLastName2", "123123123"),
             List.of(
-                    new Item())
-    );
+                    new Item("testItem", 200)
+    ));
 
     Order order2 = new Order(
-            new Customer(),
+            new Customer("testFirstName3", "testLastName3", "123123123"),
             List.of(
-                    new Item(),
-                    new Item(),
-                    new Item())
+                    new Item("testItem", 300),
+                    new Item("testItem2", 400),
+                    new Item("testItem3", 500))
     );
 
-    List<Order> orderList = List.of(order, order1, order2);
+    List<Order> orderList = new ArrayList<>(List.of(order, order1, order2));
 
     @BeforeEach
     void setUp() {
 
-        when(mockRepo.findAll()).thenReturn(orderList);
         when(mockRepo.findById(1L)).thenReturn(Optional.of(order));
         when(mockRepo.findById(2L)).thenReturn(Optional.of(order1));
         when(mockRepo.findById(3L)).thenReturn(Optional.of(order2));
+        when(mockRepo.findAll()).thenReturn(orderList);
 
     }
 
@@ -69,8 +76,7 @@ class OrderControllerTest {
         mockMvc.perform(get("/orders"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
-                        new ObjectMapper()
-                                .writeValueAsString(orderList)
+                     mapper.writeValueAsString(orderList)
                 ));
     }
 
@@ -78,11 +84,16 @@ class OrderControllerTest {
     void testGetOrderById() throws Exception {
         mockMvc.perform(get("/orders/2"))
                 .andExpect(status().isOk())
-                .andExpect(content().json(
-                        new ObjectMapper()
-                                .writeValueAsString(order1)
+                    .andExpect(content().json(
+                        mapper.writeValueAsString(order1)
                 ));
     }
 
-  
+    @Test
+    void testGetOrderByIdFaulty() throws Exception {
+        mockMvc.perform(get("/orders/4"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().json("{\"error\":\"Order not found\"}"));
+    }
+
 }

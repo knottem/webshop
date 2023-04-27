@@ -28,7 +28,7 @@ public class OrderController {
     public ResponseEntity<Object> getOrderById(@PathVariable(required = false) long id) {
         Order order = orderRepository.findById(id).isPresent() ? orderRepository.findById(id).get() : null;
         if (order == null) {
-            return new ResponseEntity<>(Collections.singletonMap("error", "Product not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(Collections.singletonMap("error", "Order not found"), HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(order, HttpStatus.OK);
         }
