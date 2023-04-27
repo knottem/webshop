@@ -4,11 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -36,7 +33,7 @@ public class Order {
         this.orderDate = LocalDateTime.now();
     }
 
-    public Order(Customer customer, List<Item> items, LocalDateTime orderDate){
+    public Order(Customer customer, List<Item> items, LocalDateTime orderDate) {
         this.customer = customer;
         this.items = items;
         this.orderDate = orderDate;

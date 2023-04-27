@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +73,6 @@ class OrderControllerTest {
 
     @Test
     void testGetAllOrders() throws Exception {
-        System.out.println(mapper.writeValueAsString(orderList));
         mockMvc.perform(get("/orders"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
@@ -82,9 +82,6 @@ class OrderControllerTest {
 
     @Test
     void testGetOrderById() throws Exception {
-        ObjectMapper mapper = JsonMapper.builder()
-                .findAndAddModules()
-                .build();
         mockMvc.perform(get("/orders/2"))
                 .andExpect(status().isOk())
                     .andExpect(content().json(
@@ -98,4 +95,5 @@ class OrderControllerTest {
                 .andExpect(status().isNotFound())
                 .andExpect(content().json("{\"error\":\"Order not found\"}"));
     }
+
 }
