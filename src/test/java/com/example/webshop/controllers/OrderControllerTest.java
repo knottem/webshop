@@ -39,20 +39,20 @@ class OrderControllerTest {
                 .build();
 
     Order order = new Order(
-            new Customer("testCustomer"),
+            new Customer("testFirstName1", "testLastName1", "123123123"),
             List.of(
                     new Item("testItem", 200),
                     new Item("testItem2", 300))
     );
 
     Order order1 = new Order(
-            new Customer("testCustomer2"),
+            new Customer("testFirstName2", "testLastName2", "123123123"),
             List.of(
                     new Item("testItem", 200)
     ));
 
     Order order2 = new Order(
-            new Customer("testCustomer3"),
+            new Customer("testFirstName3", "testLastName3", "123123123"),
             List.of(
                     new Item("testItem", 300),
                     new Item("testItem2", 400),
