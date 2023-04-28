@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Thanks</title>
+</head>
+<body>
+<p th:text="'Thank you for registering ' + ${fname} + ' ' + ${lname} + '!'"/>
+
+<a href="/customerList">Link to all Customers</a>
+</body>
+</html>
