@@ -1,11 +1,13 @@
 package com.example.webshop.models;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+
 @Table(name = "customers")
 @NoArgsConstructor
 public class Customer {
@@ -25,3 +27,4 @@ public class Customer {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 }
+
