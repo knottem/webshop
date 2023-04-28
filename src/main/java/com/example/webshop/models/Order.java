@@ -24,7 +24,7 @@ public class Order {
     @OneToOne(cascade = CascadeType.ALL)
     private Customer customer;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     List<Item> items;
 
     public Order(Customer customer, List<Item> items){
