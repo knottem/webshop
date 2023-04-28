@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-
 @NoArgsConstructor
 public class Customer {
     @Id

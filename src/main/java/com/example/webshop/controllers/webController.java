@@ -60,4 +60,11 @@ public class webController {
             return "customerId";
         }
     }
+
+    @GetMapping("/customerList/{id}/delete")
+    public String deleteCustomerById(@PathVariable long id){
+        customerRepository.deleteById(id);
+        return "redirect:/customerList";
+    }
+
 }
