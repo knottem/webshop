@@ -21,7 +21,7 @@ public class Item {
     private double price;
 
 
-    public Item(String name, long price) {
+    public Item(String name, double price) {
         this.name = name;
         this.price = price;
     }
