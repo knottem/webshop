@@ -56,10 +56,10 @@ public class ConfigStart {
                 itemRepository.save(item3);
                 itemRepository.save(item4);
 
-                orderRepository.save(new Order(customer, List.of(item, item1, item2), LocalDateTime.from(LocalDateTime.of(2023, 3, 25, 21, 30, 42, 0))));
-                orderRepository.save(new Order(customer1, List.of(item3, item4), LocalDateTime.from(LocalDateTime.of(2023, 4, 1, 9, 39, 42, 0))));
-                orderRepository.save(new Order(customer2, List.of(item, item2, item4),  LocalDateTime.from(LocalDateTime.of(2023, 4, 10, 16, 30, 30, 0))));
-                orderRepository.save(new Order(customer3, List.of(item1, item3), LocalDateTime.from(LocalDateTime.of(2023, 4, 20, 12, 10, 20, 0))));
+                orderRepository.save(new Order(customer, List.of(item, item1, item2), LocalDateTime.of(2023, 3, 25, 21, 30, 42, 0)));
+                orderRepository.save(new Order(customer1, List.of(item3, item4), LocalDateTime.of(2023, 4, 1, 9, 39, 42, 0)));
+                orderRepository.save(new Order(customer2, List.of(item, item2, item4),  LocalDateTime.of(2023, 4, 10, 16, 30, 30, 0)));
+                orderRepository.save(new Order(customer3, List.of(item1, item3), LocalDateTime.of(2023, 4, 20, 12, 10, 20, 0)));
 
             }
         };
