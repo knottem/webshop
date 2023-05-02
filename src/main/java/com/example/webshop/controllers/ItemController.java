@@ -41,11 +41,11 @@ public class ItemController {
     @PostMapping({"/items", "/items/"})
     public ResponseEntity<Object> createItem(@RequestBody Item item) {
         if (item == null) {
-            return new ResponseEntity<>(Collections.singletonMap("error", "Product not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(Collections.singletonMap("error", "Item not found"), HttpStatus.NOT_FOUND);
         } else if (item.getName().isEmpty() || item.getName() == null || item.getPrice() == 0) {
-            return new ResponseEntity<>(Collections.singletonMap("error", "Product is empty"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(Collections.singletonMap("error", "Item is empty"), HttpStatus.BAD_REQUEST);
         } else if (itemRepository.findByName(item.getName()).size() > 0) {
-            return new ResponseEntity<>(Collections.singletonMap("error", "Product already exists"), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(Collections.singletonMap("error", "Item already exists"), HttpStatus.CONFLICT);
         } else {
             itemRepository.save(item);
             logger.info("Item created: " + item.toString());
@@ -57,7 +57,7 @@ public class ItemController {
     public ResponseEntity<Object> getItemById(@PathVariable(required = false) long id) {
         Item item = itemRepository.findById(id).isPresent() ? itemRepository.findById(id).get() : null;
         if (item == null) {
-            return new ResponseEntity<>(Collections.singletonMap("error", "Product not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(Collections.singletonMap("error", "Item not found"), HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(item, HttpStatus.OK);
         }
