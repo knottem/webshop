@@ -53,6 +53,7 @@ public class webController {
     public String getCustomerById(@PathVariable long id, Model model) {
         Customer customer = customerRepository.findById(id).isPresent() ? customerRepository.findById(id).get() : null;
         if (customer == null) {
+            model.addAttribute("customers", customerRepository.findAll());
             model.addAttribute("error", "Customer not found");
             return "customerList";
         } else {
