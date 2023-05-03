@@ -30,7 +30,7 @@ public class Order {
     public Order(Customer customer, List<Item> items){
         this.customer = customer;
         this.items = items;
-        this.orderDate = LocalDateTime.now();
+        this.orderDate = LocalDateTime.now().withNano(0);
     }
 
     public Order(Customer customer, List<Item> items, LocalDateTime orderDate) {
