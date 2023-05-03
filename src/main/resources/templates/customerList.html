@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Customers</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>SSN</th>
+        <th>Link</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.getId()}"></td>
+        <td th:text="${customer.getFirstName()}"></td>
+        <td th:text="${customer.getLastName()}"></td>
+        <td th:text="${customer.getSocialSecurityNumber()}"></td>
+        <td><a th:href="@{/customerList/{id}(id=${customer.getId()})}">Link</a></td>
+        <td><a th:href="@{customerList/{id}/delete(id=${customer.getId()})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<p th:text="${error}" style="color: crimson"></p><br>
+
+<form action="#" th:action="@{/form}" method="post">
+    <label for="fName">First Name:</label><br>
+    <input type="text" id="fName" name="fName"><br>
+    <label for="lName">Last Name:</label><br>
+    <input type="text" id="lName" name="lName"><br>
+    <label for="ssn">SSN:</label><br>
+    <input type="text" id="ssn" name="ssn"><br>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
